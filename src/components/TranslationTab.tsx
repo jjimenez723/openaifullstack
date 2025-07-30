@@ -29,7 +29,11 @@ export default function TranslationTab() {
 
     try {
       const response = await translate(input, targetLang);
-      setTranslation(response.choices[0].message.content);
+      if (response?.choices?.[0]?.message?.content) {
+        setTranslation(response.choices[0].message.content);
+      } else {
+        throw new Error('Invalid response format');
+      }
     } catch (error) {
       console.error('Translation error:', error);
     }

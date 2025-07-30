@@ -13,7 +13,11 @@ export default function BrainstormTab() {
 
     try {
       const response = await brainstorm(prompt);
-      setIdeas(response.choices[0].message.content);
+      if (response?.choices?.[0]?.message?.content) {
+        setIdeas(response.choices[0].message.content);
+      } else {
+        throw new Error('Invalid response format');
+      }
     } catch (error) {
       console.error('Brainstorm error:', error);
     }

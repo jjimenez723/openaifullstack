@@ -13,7 +13,11 @@ export default function SummaryTab() {
 
     try {
       const response = await summarize(input);
-      setSummary(response.choices[0].message.content);
+      if (response?.choices?.[0]?.message?.content) {
+        setSummary(response.choices[0].message.content);
+      } else {
+        throw new Error('Invalid response format');
+      }
     } catch (error) {
       console.error('Summary error:', error);
     }

@@ -35,12 +35,15 @@ export default function CodeHelperSandbox() {
         { role: 'user', content: prompt },
       ]);
 
-      const newResult: ResultPanel = {
-        type,
-        content: response.choices[0].message.content,
-      };
-
-      setResults(prev => [newResult, ...prev]);
+    const content = response?.choices?.[0]?.message?.content;
+    if (!content) {
+      throw new Error('Invalid response format');
+    }
+    
+    const newResult: ResultPanel = {
+      type,
+      content,
+    };      setResults(prev => [newResult, ...prev]);
       setExpanded(type);
     } catch (error) {
       console.error('Analysis error:', error);
