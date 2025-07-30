@@ -3,9 +3,9 @@
 import { ReactNode } from "react";
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
-import theme from "./Theme";
+import theme from "@/app/Theme";
 
-export function Providers({ children }: { children: ReactNode }) {
+export function AppProviders({ children }: { children: ReactNode }) {
   return (
     <CacheProvider>
       <ChakraProvider theme={theme} resetCSS>
